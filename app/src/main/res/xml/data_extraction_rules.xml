@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Specify what data should be backed up to the cloud -->
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="secure_user_prefs.xml"/>
+        <exclude domain="file" path="cache/"/>
+    </cloud-backup>
+    
+    <device-transfer>
+        <!-- Specify what data should be included in device-to-device transfer -->
+        <include domain="sharedpref" path="."/>
+        <exclude domain="sharedpref" path="secure_user_prefs.xml"/>
+        <exclude domain="file" path="cache/"/>
+    </device-transfer>
+</data-extraction-rules>
