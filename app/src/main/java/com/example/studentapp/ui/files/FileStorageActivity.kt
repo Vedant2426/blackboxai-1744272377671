@@ -63,8 +63,7 @@ class FileStorageActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         fileAdapter = FileAdapter(
             onFileClick = { fileItem ->
-                // TODO: Implement file opening functionality
-                Toast.makeText(this, "Opening ${fileItem.name}", Toast.LENGTH_SHORT).show()
+                openFile(fileItem)
             },
             onFileDelete = { fileItem ->
                 showDeleteConfirmationDialog(fileItem)
@@ -211,44 +210,44 @@ class FileStorageActivity : AppCompatActivity() {
         }
     }
 
-    private fun showQrCodeDialog(fileItem: FileItem) {
-        val dialog = Dialog(this)
-        val binding = DialogQrCodeBinding.inflate(layoutInflater)
-        dialog.setContentView(binding.root)
+    private fun showLoading(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        binding.addFileFab.isEnabled = !show
+    }
 
-        // Set dialog width to match parent with margins
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+    private fun openFile(fileItem: FileItem) {
+        try {
+            val uri = androidx.core.content.FileProvider.getUriForFile(
+                this,
+                "${applicationContext.packageName}.provider",
+                fileItem.file
+            )
 
-        binding.apply {
-            // Generate QR code
-            lifecycleScope.launch(Dispatchers.IO) {
-                val qrBitmap = QrUtils.generateQrCodeForFile(fileItem.file, fileItem.category)
-                
-                withContext(Dispatchers.Main) {
-                    if (qrBitmap != null) {
-                        qrCodeImage.setImageBitmap(qrBitmap)
-                        fileInfoText.text = "File: ${fileItem.name}\nSize: ${fileItem.size}"
-                    } else {
-                        fileInfoText.text = "Failed to generate QR code"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                data = uri
+
+                when {
+                    fileItem.isPdf -> {
+                        type = "application/pdf"
+                    }
+                    fileItem.isImage -> {
+                        type = "image/*"
+                    }
+                    else -> {
+                        type = "*/*"
                     }
                 }
             }
 
-            // Set close button click listener
-            closeButton.setOnClickListener {
-                dialog.dismiss()
-            }
+            startActivity(Intent.createChooser(intent, "Open ${fileItem.name} with..."))
+        } catch (e: Exception) {
+            Toast.makeText(
+                this,
+                "Error opening file: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
-
-        dialog.show()
-    }
-
-    private fun showLoading(show: Boolean) {
-        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
-        binding.addFileFab.isEnabled = !show
     }
 
     private fun showQrCodeDialog(fileItem: FileItem) {
