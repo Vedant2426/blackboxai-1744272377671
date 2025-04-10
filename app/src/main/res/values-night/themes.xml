@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme application theme -->
+    <style name="Theme.StudentApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/gray_900</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/black</item>
+        
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/gray_100</item>
+        <item name="android:textColorSecondary">@color/gray_400</item>
+        
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/gray_900</item>
+        <item name="colorSurface">@color/gray_800</item>
+        <item name="colorOnSurface">@color/gray_100</item>
+        
+        <!-- Error colors -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Custom attributes -->
+        <item name="materialButtonStyle">@style/Widget.StudentApp.Button.Dark</item>
+        <item name="textInputStyle">@style/Widget.StudentApp.TextInputLayout.Dark</item>
+    </style>
+
+    <!-- Dark theme button style -->
+    <style name="Widget.StudentApp.Button.Dark" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">12dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:letterSpacing">0.025</item>
+        <item name="backgroundTint">@color/primary_light</item>
+        <item name="android:textColor">@color/gray_900</item>
+    </style>
+
+    <!-- Dark theme TextInputLayout style -->
+    <style name="Widget.StudentApp.TextInputLayout.Dark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="boxStrokeColor">@color/gray_400</item>
+        <item name="hintTextColor">@color/gray_400</item>
+    </style>
+
+    <!-- Dark theme card style -->
+    <style name="Widget.StudentApp.CardView.Dark" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="contentPadding">16dp</item>
+        <item name="cardBackgroundColor">@color/gray_800</item>
+    </style>
+
+    <!-- Dark theme toolbar style -->
+    <style name="Widget.StudentApp.Toolbar.Dark" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextAppearance">@style/TextAppearance.StudentApp.Toolbar.Title.Dark</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.StudentApp.Toolbar.Subtitle.Dark</item>
+        <item name="android:background">@color/gray_900</item>
+    </style>
+
+    <!-- Dark theme toolbar text appearances -->
+    <style name="TextAppearance.StudentApp.Toolbar.Title.Dark" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_100</item>
+    </style>
+
+    <style name="TextAppearance.StudentApp.Toolbar.Subtitle.Dark" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_400</item>
+    </style>
+</resources>
